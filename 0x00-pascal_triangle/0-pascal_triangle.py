@@ -1,6 +1,9 @@
+#!/usr/bin/python3
+
 """
 Pascal_Triangle
 """
+
 
 def pascal_triangle(n):
     """
@@ -9,7 +12,8 @@ def pascal_triangle(n):
         n: int
     return pascal triangle
     """
-    if n <= 0: return []
+    if n <= 0:
+        return []
 
     triangle = [[1]]
     for row_num in range(1, n):
