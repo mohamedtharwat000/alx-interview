@@ -19,12 +19,3 @@ def pascal_triangle(n):
             row[i] = triangle[row_num - 1][i - 1] + triangle[row_num - 1][i]
 
     return triangle
-
-def print_triangle(triangle):
-    """
-    Print the triangle
-    """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
-
-print_triangle(pascal_triangle(5))
