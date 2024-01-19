@@ -10,7 +10,7 @@ def minOperations(n) -> int:
     if n <= 1:
         return 0
     i = 2
-    count = 0
+    count = i
     while i <= n:
         if n % i == 0:
             count += i
