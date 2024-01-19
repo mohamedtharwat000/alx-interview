@@ -9,7 +9,7 @@ def minOperations(n) -> int:
     """ minOperations """
     if n <= 1:
         return 0
-    i = 2
+    i = 0
     count = i
     while i <= n:
         if n % i == 0:
