@@ -13,10 +13,15 @@ def minOperations(n) -> int:
     result = n
     operations = 0
 
-    for i in range(2, n + 1):
-        for _ in range(result // i):
-            if result % i == 0:
-                operations += i
-                result //= i
+    while result % 2 == 0:
+        operations += 2
+        result //= 2
+
+    for i in range(3, result + 1, 2):
+        while result % i == 0:
+            operations += i
+            result //= i
 
     return operations
+
+print(minOperations(8))
