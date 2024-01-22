@@ -9,12 +9,14 @@ def minOperations(n) -> int:
     """ minOperations """
     if n <= 1:
         return 0
-    i = 2
-    count = 0
-    while i <= n:
-        if n % i == 0:
-            count += i
-            n = n / i
-        else:
-            i += 1
-    return count
+
+    result = n
+    operations = 0
+
+    for i in range(2, n + 1):
+        for _ in range(result // i):
+            if result % i == 0:
+                operations += i
+                result //= i
+
+    return operations
