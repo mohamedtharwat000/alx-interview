@@ -23,5 +23,3 @@ def minOperations(n) -> int:
             result //= i
 
     return operations
-
-print(minOperations(8))
