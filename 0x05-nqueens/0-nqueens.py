@@ -16,7 +16,9 @@ class Queen:
 def is_safe(queens, new_row):
     '''Check if a queen can be placed in the given row without attacks'''
     for queen in queens:
-        if queen.row == new_row or abs(queen.col - queens[-1].col) == abs(new_row - queens[-1].row):
+        if queen.row == new_row or (
+            abs(queen.col - queens[-1].col) == abs(new_row - queens[-1].row)
+        ):
             return False
     return True
 
