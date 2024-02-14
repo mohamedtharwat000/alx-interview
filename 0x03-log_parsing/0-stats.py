@@ -1,32 +1,60 @@
 #!/usr/bin/python3
-"""Log parsing"""
+""" Log parsing """
+import re
 
 
-def compute_metrics(lines):
-    """Compute metrics from log lines"""
-    total_size = 0
-    status_counts = defaultdict(int)
+def check_input(line):
+    """ doc """
+    regex = r'^[\S]+\s*-\s*\[\d{4}-\d\d-\d\d\s*\d\d:\d\d:\d\d\.\d{6}\]'
+    regex2 = r'\s*"GET \/projects\/260 HTTP\/1\.1"\s*(\S+)\s*(\d+)$'
+    match = re.match(regex + regex2, line)
 
-    for line in lines:
-        try:
-            parts = line.split()
-            file_size = int(parts[-2])
-            status_code = int(parts[-3])
+    if match:
+        status_code = match.group(1)
+        file_size = int(match.group(2))
 
-            # Update total file size
-            total_size += file_size
+        return [status_code, file_size]
+    return []
 
-            # Update status code counts
-            status_counts[status_code] += 1
-        except (IndexError, ValueError):
-            # Skip lines with incorrect format
+
+def print_data(file_size=0, data={}):
+    """ doc """
+    print(f'File size: {file_size}', flush=True)
+    for key in sorted(data.keys()):
+        if data[key] == 0:
             continue
+        print(f'{key}: {data[key]}', flush=True)
 
-    return total_size, status_counts
+
+def show_status():
+    """ doc """
+    status_code = {
+        '200': 0, '301': 0,
+        '400': 0, '401': 0,
+        '403': 0, '404': 0,
+        '405': 0, '500': 0,
+    }
+    file_size = 0
+    counter = 0
+    try:
+        while True:
+            line = input()
+            data = check_input(line)
+            if len(data) == 0:
+                continue
+            if data[0] in status_code.keys():
+                status_code[data[0]] += 1
+            file_size += data[1]
+            counter += 1
+            if counter == 10:
+                print_data(file_size, status_code)
+                counter = 0
+
+    except (KeyboardInterrupt, EOFError):
+        print_data(file_size, status_code)
+        counter = 0
 
 
-def print_statistics(total_size, status_counts):
-    """Print statistics"""
-    print(f"Total file size: {total_size}")
-    for status_code in sorted(status_counts.keys()):
-        print(f"{status_code}: {status_counts[status_code]}")
+if __name__ == "__main__":
+    """ main function """
+    show_status()
