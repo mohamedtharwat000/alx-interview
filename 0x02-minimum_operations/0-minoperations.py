@@ -1,25 +1,21 @@
 #!/usr/bin/python3
-
-"""
-minOperations
-"""
+""" Minimum Operations """
 
 
-def minOperations(n) -> int:
-    """ minOperations """
-    if n <= 1:
-        return 0
+def minOperations(n):
+    """
+    Read the README file.
+    """
+    op = 0
+    main_h = z = 1
 
-    result = n
-    operations = 0
+    while n > main_h:
+        if n % main_h == 0:
+            z = main_h
+            main_h += main_h
+            op += 2
+        else:
+            main_h += z
+            op += 1
 
-    while result % 2 == 0:
-        operations += 2
-        result //= 2
-
-    for i in range(3, result + 1, 2):
-        while result % i == 0:
-            operations += i
-            result //= i
-
-    return operations
+    return op
