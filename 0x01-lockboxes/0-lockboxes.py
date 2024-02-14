@@ -1,31 +1,28 @@
 #!/usr/bin/python3
-""" Lockboxes """
+"""Lockboxes"""
 
 
 def canUnlockAll(boxes):
+    """Method that determines if all the boxes can be opened.
+    Args:
+        boxes: list of lists
+    Returns:
+        True if all boxes can be opened, else return False
     """
-    a method that determines if all the boxes can be opened.
+    if not boxes or not boxes[0]:
+        return False
 
-    Args
-        boxes: is a list of lists
-    """
-    uni = set()
-    counter = 0
-    uni, counter = rec(boxes, uni, counter)
+    n = len(boxes)
+    visited = [False] * n
+    visited[0] = True
+    stack = [0]
 
-    return (len(uni) == len(boxes))
+    while stack:
+        current_box = stack.pop()
 
+        for key in boxes[current_box]:
+            if 0 <= key < n and not visited[key]:
+                visited[key] = True
+                stack.append(key)
 
-def rec(boxes, uni, counter):
-    """
-    Traverse through the boxes
-    """
-
-    if counter >= len(boxes):
-        return uni, counter
-    uni.add(counter)
-    for k in boxes[counter]:
-        if k not in uni:
-            uni, counter = rec(boxes, uni, k)
-
-    return uni, counter
+    return all(visited)
