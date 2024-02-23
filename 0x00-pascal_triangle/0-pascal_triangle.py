@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-pascal_triangle
+pascal_triangle function
 """
 
 
@@ -13,6 +13,7 @@ def pascal_triangle(n):
     """
     if n <= 0:
         return ([])
+
     pascal = [[1]]
 
     for i in range(n - 1):
