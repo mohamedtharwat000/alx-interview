@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """rotate_2d_matrix.py: Rotate a 2D matrix by 90 degrees in place."""
 
 
