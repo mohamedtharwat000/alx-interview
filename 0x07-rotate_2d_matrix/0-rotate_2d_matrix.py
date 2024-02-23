@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"""rotate_2d_matrix.py: Rotate a 2D matrix by 90 degrees in place."""
+""" Rotate 2D matrix """
 
 
-def rotate_2d_matrix(matrix: list[list[int]]) -> None:
+def rotate_2d_matrix(matrix):
     """Rotate a 2D matrix by 90 degrees in place."""
     length = len(matrix)
     for row in range(length // 2):
