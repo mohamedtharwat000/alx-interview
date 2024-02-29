@@ -7,10 +7,9 @@ def makeChange(coins, total):
     """Return the fewest number of coins needed to meet a given amount."""
     if total <= 0:
         return 0
-    coins.sort(reverse=True)
-    result = []
+    dp = [float('inf')] * (total + 1)
+    dp[0] = 0
     for coin in coins:
-        while coin <= total:
-            result.append(coin)
-            total -= coin
-    return len(result)
+        for x in range(coin, total + 1):
+            dp[x] = min(dp[x], dp[x - coin] + 1)
+    return dp[total] if dp[total] != float('inf') else -1
