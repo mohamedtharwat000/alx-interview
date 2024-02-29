@@ -8,9 +8,6 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    if not coins:
-        return -1
-
     coins.sort(reverse=True)
 
     result = []
@@ -20,7 +17,7 @@ def makeChange(coins, total):
             result.append(coin)
             total -= coin
 
-    if sum(result) != total:
+    if sum(result) != total + sum(result):
         return -1
 
     return len(result)
