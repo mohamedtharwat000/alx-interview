@@ -2,14 +2,15 @@
 
 """Fewest number of coins needed to meet a given amount."""
 
-def make_change(coins, amount):
+
+def makeChange(coins: list[int], total: int) -> int:
     """Return the fewest number of coins needed to meet a given amount."""
-    if amount == 0:
+    if total <= 0:
         return 0
     coins.sort(reverse=True)
     result = []
     for coin in coins:
-        while coin <= amount:
+        while coin <= total:
             result.append(coin)
-            amount -= coin
+            total -= coin
     return len(result)
