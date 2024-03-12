@@ -19,23 +19,20 @@ def isWinner(x, nums):
 
     def play_game(max_n):
         """Play a round of the prime game"""
-        if max_n < 2:
-            return None
         numbers = [(n, int(is_prime(n))) for n in range(1, max_n + 1)]
-        turn = False
+        turn = True
         for n in numbers:
-            if n[1]:
+            if n and n[1]:
                 turn = not turn
-                for j in numbers[n[0]:]:
-                    if j[0] % n[0] == 0:
-                        numbers.pop(numbers.index(j))
-        return turn
+                for j in numbers:
+                    if j and j[0] % n[0] == 0:
+                        numbers[numbers.index(j)] = None
+        return int(turn)
 
     wins = [0, 0]
     for max_n in nums:
-        winer = play_game(max_n)
-        if winer:
-            wins[winer] += 1
+        wineer = play_game(max_n)
+        wins[wineer] += 1
 
     if wins[0] == wins[1]:
         return None
