@@ -5,7 +5,10 @@
 
 def isWinner(x, nums):
     """Prime Game"""
-    if x < 1 or not nums:
+    if type(x) != int or x < 1:
+        return None
+
+    if not nums or type(nums) is not list or nums == []:
         return None
 
     for n in nums:
