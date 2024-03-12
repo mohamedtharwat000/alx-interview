@@ -8,6 +8,10 @@ def isWinner(x, nums):
     if x < 1 or not nums:
         return None
 
+    for n in nums:
+        if n < 0:
+            return None
+
     def is_prime(number):
         """Check if a number is prime"""
         if number <= 1:
@@ -18,7 +22,7 @@ def isWinner(x, nums):
         return True
 
     def play_game(max_n):
-        """Play a round of the prime game"""
+        """Play a round of the prime game and return the winner"""
         numbers = [(n, int(is_prime(n))) for n in range(1, max_n + 1)]
         turn = True
         for n in numbers:
