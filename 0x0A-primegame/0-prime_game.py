@@ -5,11 +5,15 @@
 
 def isWinner(x, nums):
     """Prime Game"""
-    if not isinstance(x, int) or x <= 0:
+    if type(x) != int or x < 1:
         return None
 
-    if not nums or isinstance(nums, list) or min(nums) < 0:
+    if not nums or type(nums) is not list or nums == []:
         return None
+
+    for n in nums:
+        if n < 0:
+            return None
 
     def is_prime(number):
         """Check if a number is prime"""
