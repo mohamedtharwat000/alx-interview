@@ -11,10 +11,6 @@ def isWinner(x, nums):
     if not nums or type(nums) is not list or nums == []:
         return None
 
-    # for n in nums:
-    #     if n < 0:
-    #         return None
-
     def is_prime(number):
         """Check if a number is prime"""
         if number <= 1:
