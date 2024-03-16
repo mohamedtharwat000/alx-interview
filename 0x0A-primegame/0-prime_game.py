@@ -11,29 +11,29 @@ def isWinner(x, nums):
     if not nums or type(nums) is not list or nums == []:
         return None
 
-    for n in nums:
-        if n < 0:
-            return None
+    # for n in nums:
+    #     if n < 0:
+    #         return None
 
     def is_prime(number):
         """Check if a number is prime"""
         if number <= 1:
             return False
-        for i in range(2, int(number ** 0.5) + 1):
-            if number % i == 0:
+        for n in range(2, int(number ** 0.5) + 1):
+            if number % n == 0:
                 return False
         return True
 
     def play_game(max_n):
         """Play a round of the prime game and return the winner"""
-        numbers = [(n, int(is_prime(n))) for n in range(1, max_n + 1)]
+        numbers = [n for n in range(1, max_n + 1) if is_prime(n)]
         turn = True
         for n in numbers:
-            if n and n[1]:
-                turn = not turn
-                for j in numbers:
-                    if j and j[0] % n[0] == 0:
-                        numbers[numbers.index(j)] = None
+            turn = not turn
+            for j in numbers:
+                if j and j % n == 0:
+                    numbers[numbers.index(j)] = None
+
         return int(turn)
 
     wins = [0, 0]
